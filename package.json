@@ -1,0 +1,72 @@
+{
+  "name": "@kubevious/ui-dev-tools",
+  "version": "1.0.1",
+  "description": "Kubevious UI Dev Tools",
+  "main": "dist/index.js",
+  "types": "dist",
+  "files": [
+    "dist/**/*",
+    "public/**/*"
+  ],
+  "scripts": {
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' env IS_TESTING=true jest",
+    "test:watch": "jest --watch",
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "format": "prettier --write ./src/ ./test/",
+    "format-check": "prettier --write ./src/ ./test/",
+    "lint": "eslint"
+  },
+  "author": "Ruben Hakopian <ruben.hakopian@gmail.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kubevious/ui-dev-tools"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
+    "@kubevious/helpers": "^1.0.48",
+    "@kubevious/ui-framework": "^1.0.23",
+    "@kubevious/ui-middleware": "^1.0.13",
+    "classnames": "^2.2.6",
+    "golden-layout": "^1.5.9",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "react-router-dom": "^5.2.0",
+    "the-lodash": "^2.0.9",
+    "the-promise": "^2.0.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@types/classnames": "^2.2.11",
+    "@types/jest": "^26.0.20",
+    "@types/jquery": "^3.5.5",
+    "@types/node": "^14.6.0",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/should": "^13.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.10.0",
+    "@typescript-eslint/parser": "^3.10.0",
+    "eslint": "^7.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.0.0",
+    "prettier": "^2.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "rollup": "^2.39.1",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "should": "^13.2.3",
+    "ts-jest": "^26.5.2",
+    "ts-node": "^9.0.0",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.3"
+  }
+}
