@@ -36,7 +36,7 @@ export const RestTool = () => {
     useEffect(() => {
         const endpointsFromState = sharedState.get('endpoints')
 
-        const generatedEndpoints: EndpointInfo[] = _.map(endpointsFromState, (x) => {
+        const generatedEndpoints: (string | EndpointInfo[]) = _.map(endpointsFromState, (x) => {
             if (_.isString(x)) {
                 return {
                     name: x,
