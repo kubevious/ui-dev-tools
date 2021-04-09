@@ -1,1 +1,3 @@
-export const TEST=123;
+export { RestTool } from './RestTool';
+
+export type { EndpointInfo } from './RestTool/types'

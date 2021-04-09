@@ -13,6 +13,7 @@ npm update \
     the-promise \
     @kubevious/helpers \
     @kubevious/ui-framework \
-    @kubevious/ui-middleware
+    @kubevious/ui-middleware \
+    @kubevious/ui-components
 
 ${MY_DIR}/build.sh
