@@ -96,7 +96,7 @@ export const WebsocketTool = () => {
 
     return (
         <>
-            <div>
+            <div data-testid="websocket-tool">
                 <h2>Websocket Tool</h2>
                 <div className="ext-area-container">
                     <div className="label-wrap">
