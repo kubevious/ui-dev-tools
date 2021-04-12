@@ -1,0 +1,16 @@
+.subscription-text-area {
+    height: 120px !important;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.subscription-text-area::-webkit-scrollbar {
+    display: none;
+}
+
+.subscription-button-container {
+    display: flex;
+    justify-content: center;
+}
