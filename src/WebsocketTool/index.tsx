@@ -46,10 +46,9 @@ export const WebsocketTool = () => {
         const svcInfo = _.clone(subscriptionData.query);
         svcInfo.kind = subscriptionData.kind;
 
-        let service : IWebSocketService;
+        let service: IWebSocketService;
 
-        try
-        {
+        try {
             service = app.serviceRegistry.resolveService<IWebSocketService>(svcInfo);
 
             service.updateContext(subscriptionData.context);
@@ -59,8 +58,7 @@ export const WebsocketTool = () => {
             })
 
         }
-        catch(error)
-        {
+        catch (error) {
             app.sharedState.set("is_error", true)
             app.sharedState.set("error", error);
         }
@@ -80,7 +78,7 @@ export const WebsocketTool = () => {
     const handleSubscribe = () => {
         setSubscriptionResults([])
         try {
-            const data : SubscriptionData = {
+            const data: SubscriptionData = {
                 kind: serviceKind,
                 query: parsingData(strSubscriptionQuery),
                 context: parsingData(strSubscriptionContext),
@@ -88,95 +86,91 @@ export const WebsocketTool = () => {
             }
 
             setSubscriptionData(data);
-        } catch(error) {
+        } catch (error) {
             app.sharedState.set("is_error", true)
             app.sharedState.set("error", error); // { message: _.toString(error), })
         }
     }
 
     return (
-        <>
-            <div data-testid="websocket-tool">
-                <h2>Websocket Tool</h2>
-                <div className="ext-area-container">
-                    <div className="label-wrap">
-                        <label className="field-label">Service Kind: </label>
-                    </div>
-                    <input
-                        type="text"
-                        className="field-input"
-                        value={serviceKind}
-                        onChange={(e) => setServiceKind(e.target.value)}
-                    />
+        <div data-testid="websocket-tool" className="websocket-tool">
+            <h2>Websocket Tool</h2>
+            <div className="ext-area-container">
+                <div className="label-wrap">
+                    <label className="field-label">Service Kind: </label>
                 </div>
-                <div className="text-area-container">
-                    <>
-                        <div className="text-area-label">
-                            Subscription Query:
-                        </div>
-                        <YamlControlBar
-                            className={"subscription-text-area"}
-                            value={strSubscriptionQuery}
-                            text={strSubscriptionQuery}
-                            beforeChange={({ value }) => setSubscriptionQuery(value)}
-                            downloadButton
-                        />
-                    </>
-                </div>
-                <div className="text-area-container">
-                    <>
-                        <div className="text-area-label">
-                            Subscription Context:
-                        </div>
-                        <YamlControlBar
-                            className={"subscription-text-area"}
-                            value={strSubscriptionContext}
-                            text={strSubscriptionContext}
-                            beforeChange={({ value }) => setSubscriptionContext(value)}
-                            downloadButton
-                        />
-                    </>
-                </div>
-                <div className="text-area-container">
-                    <>
-                        <div className="text-area-label">
-                            Subscription Target:
-                        </div>
-                        <YamlControlBar
-                            className={"subscription-text-area"}
-                            value={strSubscriptionTarget}
-                            text={strSubscriptionTarget}
-                            beforeChange={({ value }) => setSubscriptionTarget(value)}
-                            downloadButton
-                        />
-                    </>
-                </div>
-                <div className="subscription-button-container">
-                    <button onClick={() => handleSubscribe()} className="main-btn">Subscribe</button>
-                </div>
-                <div className="text-area-container">
-                    <>
-                        <div className="text-area-label">Yaml Data:</div>
-                        <YamlControlBar
-                            value={strSubscriptionResults}
-                            text={strSubscriptionResults}
-                            downloadButton
-                        />
-                    </>
-                </div>
+                <input
+                    type="text"
+                    className="field-input"
+                    value={serviceKind}
+                    onChange={(e) => setServiceKind(e.target.value)}
+                />
             </div>
-        </>
+            <div className="text-area-container">
+                <>
+                    <div className="text-area-label">
+                        Subscription Query:
+                        </div>
+                    <YamlControlBar
+                        className={"subscription-text-area"}
+                        value={strSubscriptionQuery}
+                        text={strSubscriptionQuery}
+                        beforeChange={({ value }) => setSubscriptionQuery(value)}
+                        downloadButton
+                    />
+                </>
+            </div>
+            <div className="text-area-container">
+                <>
+                    <div className="text-area-label">
+                        Subscription Context:
+                        </div>
+                    <YamlControlBar
+                        className={"subscription-text-area"}
+                        value={strSubscriptionContext}
+                        text={strSubscriptionContext}
+                        beforeChange={({ value }) => setSubscriptionContext(value)}
+                        downloadButton
+                    />
+                </>
+            </div>
+            <div className="text-area-container">
+                <>
+                    <div className="text-area-label">
+                        Subscription Target:
+                        </div>
+                    <YamlControlBar
+                        className={"subscription-text-area"}
+                        value={strSubscriptionTarget}
+                        text={strSubscriptionTarget}
+                        beforeChange={({ value }) => setSubscriptionTarget(value)}
+                        downloadButton
+                    />
+                </>
+            </div>
+            <div className="subscription-button-container">
+                <button onClick={() => handleSubscribe()} className="main-btn">Subscribe</button>
+            </div>
+            <div className="text-area-container">
+                <>
+                    <div className="text-area-label">Yaml Data:</div>
+                    <YamlControlBar
+                        value={strSubscriptionResults}
+                        text={strSubscriptionResults}
+                        downloadButton
+                    />
+                </>
+            </div>
+        </div>
     )
 }
 
-function formatDataToString(data: string | {}) : string
-{
+function formatDataToString(data: string | {}): string {
     return typeof data !== "string" ? JSON.stringify(data, null, 2) : data
 }
 
 
-interface SubscriptionData
-{
+interface SubscriptionData {
     kind: string,
     query: any,
     context: any,

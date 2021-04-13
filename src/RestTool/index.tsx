@@ -145,144 +145,142 @@ export const RestTool = () => {
     };
 
     return (
-        <>
-            <div data-testid="rest-tool">
-                <h2>REST Tool</h2>
-                <div className="section">
-                    <h3>Template</h3>
-                    {renderEndpointsTemplateSelector()}
-                </div>
-                <div className="section">
-                    <h3>Request</h3>
+        <div data-testid="rest-tool" className="rest-tool">
+            <h2>REST Tool</h2>
+            <div className="section">
+                <h3>Template</h3>
+                {renderEndpointsTemplateSelector()}
+            </div>
+            <div className="section">
+                <h3>Request</h3>
 
-                    <div>
-                        <label className="label">Method: </label>
-                        <select className="select" onChange={(e) => handleChangeRequestType(e)} value={requestMethod}>
-                            {_.keys(HttpMethod).map((method, index) => (
-                                <option key={index} value={method.toString()}>
-                                    {method}
-                                </option>
-                            ))}
-                        </select>
-                        <label className="label">Path: </label>
-                        <input
-                            type="text"
-                            value={requestPath}
-                            className="input path-input"
-                            onChange={(e) => handleChangePath(e)}
+                <div>
+                    <label className="label">Method: </label>
+                    <select className="select" onChange={(e) => handleChangeRequestType(e)} value={requestMethod}>
+                        {_.keys(HttpMethod).map((method, index) => (
+                            <option key={index} value={method.toString()}>
+                                {method}
+                            </option>
+                        ))}
+                    </select>
+                    <label className="label">Path: </label>
+                    <input
+                        type="text"
+                        value={requestPath}
+                        className="input path-input"
+                        onChange={(e) => handleChangePath(e)}
+                    />
+                </div>
+
+                {requestPath && (
+                    <>
+                        <div className="label">Params: </div>
+                        {requestParams.map((param, index) => (
+                            <div key={index}>
+                                <input
+                                    type="text"
+                                    value={param.name}
+                                    className="path-input input"
+                                    onChange={(e) => {
+                                        param.name = e.target.value;
+                                        setRequestParams(_.clone(requestParams));
+
+                                        paramsHistory[param.name] = param.value;
+                                        setParamsHistory(_.clone(paramsHistory));
+                                    }}
+                                />
+                                <input
+                                    type="text"
+                                    value={param.value}
+                                    className="path-input input"
+                                    onChange={(e) => {
+                                        param.value = e.target.value;
+                                        setRequestParams(_.clone(requestParams));
+
+                                        paramsHistory[param.name] = param.value;
+                                        setParamsHistory(_.clone(paramsHistory));
+                                    }}
+                                />
+                                <button
+                                    className="main-btn"
+                                    onClick={() => {
+                                        requestParams.splice(index, 1);
+                                        setRequestParams(_.clone(requestParams));
+
+                                        delete paramsHistory[param.name];
+                                        setParamsHistory(_.clone(paramsHistory));
+                                    }}
+                                >
+                                    Delete
+                                    </button>
+                            </div>
+                        ))}
+                        <button
+                            className="main-btn"
+                            onClick={() => {
+                                requestParams.push({
+                                    name: '',
+                                    value: '',
+                                });
+                                setRequestParams(_.clone(requestParams));
+                            }}
+                        >
+                            Add
+                            </button>
+                    </>
+                )}
+                {!isTesting && (
+                    <div className="text-area-container">
+                        {requestMethod !== HttpMethod.GET && (
+                            <>
+                                <div className="text-area-label">Request Data: </div>
+                                <YamlControlBar
+                                    value={editedRequestData}
+                                    beforeChange={handleChangeRequest}
+                                    text={editedRequestData}
+                                    downloadButton
+                                />
+                            </>
+                        )}
+                        <div className="btn-wrapper">
+                            <button className="main-btn send" onClick={() => handleSendRequest()}>
+                                SEND
+                                </button>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <div className="section">
+                <h3>Response</h3>
+                {!isTesting && (
+                    <div className="text-area-container">
+                        <div className="text-area-label">Status Code: {responseCode}</div>
+                        <YamlControlBar
+                            value={responseData}
+                            beforeChange={handleChangeResponse}
+                            text={responseData}
+                            downloadButton
                         />
                     </div>
-
-                    {requestPath && (
-                        <>
-                            <div className="label">Params: </div>
-                            {requestParams.map((param, index) => (
-                                <div key={index}>
-                                    <input
-                                        type="text"
-                                        value={param.name}
-                                        className="path-input input"
-                                        onChange={(e) => {
-                                            param.name = e.target.value;
-                                            setRequestParams(_.clone(requestParams));
-
-                                            paramsHistory[param.name] = param.value;
-                                            setParamsHistory(_.clone(paramsHistory));
-                                        }}
-                                    />
-                                    <input
-                                        type="text"
-                                        value={param.value}
-                                        className="path-input input"
-                                        onChange={(e) => {
-                                            param.value = e.target.value;
-                                            setRequestParams(_.clone(requestParams));
-
-                                            paramsHistory[param.name] = param.value;
-                                            setParamsHistory(_.clone(paramsHistory));
-                                        }}
-                                    />
-                                    <button
-                                        className="main-btn"
-                                        onClick={() => {
-                                            requestParams.splice(index, 1);
-                                            setRequestParams(_.clone(requestParams));
-
-                                            delete paramsHistory[param.name];
-                                            setParamsHistory(_.clone(paramsHistory));
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            ))}
-                            <button
-                                className="main-btn"
-                                onClick={() => {
-                                    requestParams.push({
-                                        name: '',
-                                        value: '',
-                                    });
-                                    setRequestParams(_.clone(requestParams));
-                                }}
-                            >
-                                Add
-                            </button>
-                        </>
-                    )}
-                    {!isTesting && (
-                        <div className="text-area-container">
-                            {requestMethod !== HttpMethod.GET && (
-                                <>
-                                    <div className="text-area-label">Request Data: </div>
-                                    <YamlControlBar
-                                        value={editedRequestData}
-                                        beforeChange={handleChangeRequest}
-                                        text={editedRequestData}
-                                        downloadButton
-                                    />
-                                </>
-                            )}
-                            <div className="btn-wrapper">
-                                <button className="main-btn send" onClick={() => handleSendRequest()}>
-                                    SEND
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <div className="section">
-                    <h3>Response</h3>
-                    {!isTesting && (
-                        <div className="text-area-container">
-                            <div className="text-area-label">Status Code: {responseCode}</div>
-                            <YamlControlBar
-                                value={responseData}
-                                beforeChange={handleChangeResponse}
-                                text={responseData}
-                                downloadButton
-                            />
-                        </div>
-                    )}
-                </div>
-                <div className="section">
-                    <h3>Auth Info</h3>
-                    {!isTesting && (
-                        <div className="text-area-container">
-                            <div className="text-area-label">Info about user:</div>
-                            <YamlControlBar
-                                value={userData}
-                                beforeChange={handleChangeAccessToken}
-                                text={userData}
-                                downloadButton
-                            />
-                            <div className="btn-wrapper">
-                                <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
-                            </div>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
-        </>
+            <div className="section">
+                <h3>Auth Info</h3>
+                {!isTesting && (
+                    <div className="text-area-container">
+                        <div className="text-area-label">Info about user:</div>
+                        <YamlControlBar
+                            value={userData}
+                            beforeChange={handleChangeAccessToken}
+                            text={userData}
+                            downloadButton
+                        />
+                        <div className="btn-wrapper">
+                            <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
