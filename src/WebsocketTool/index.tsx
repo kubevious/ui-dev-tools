@@ -57,6 +57,7 @@ export const WebsocketTool = () => {
                 setSubscriptionResults(_.concat(subscriptionResults, value));
             });
         } catch (error) {
+            console.log(error);
             app.sharedState.set('is_error', true);
             app.sharedState.set('error', error);
         }

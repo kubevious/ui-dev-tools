@@ -1,4 +1,4 @@
-import { HttpClient, HttpMethod } from '@kubevious/ui-framework'
+import { IHttpClient, HttpMethod } from '@kubevious/ui-framework'
 import { IUserService } from '@kubevious/ui-middleware';
 
 export interface EndpointSample {
@@ -12,7 +12,7 @@ export interface EndpointInfo {
 }
 
 export interface ExpandedUserService extends IUserService {
-    client: HttpClient
+    client: IHttpClient
 }
 
 export interface HttpParam {

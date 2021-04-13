@@ -33,7 +33,7 @@
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@kubevious/helpers": "^1.0.48",
     "@kubevious/ui-components": "^1.0.56",
-    "@kubevious/ui-framework": "^1.0.39",
+    "@kubevious/ui-framework": "^1.0.40",
     "@kubevious/ui-middleware": "^1.0.20",
     "classnames": "^2.2.6",
     "codemirror": "^5.60.0",
