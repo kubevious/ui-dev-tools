@@ -23,7 +23,7 @@ export const DevToolsPage = () => {
     };
 
     return (
-        <div className="p-3">
+        <div className="p-3 overflow-auto">
             <div className="mb-2">
                 <button
                     onClick={() => setTab(DevToolTabs.sharedStateDebugger)}
