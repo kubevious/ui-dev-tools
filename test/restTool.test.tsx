@@ -1,18 +1,16 @@
 import React from 'react';
-import 'jest'
+import 'jest';
 
-import { RestTool } from "../src";
-import { render } from "@testing-library/react";
+import { RestTool } from '../src';
+import { render, RenderResult } from '@testing-library/react';
 
-function renderRestTool() {
-  return render(<RestTool />);
-}
+const renderComponent = (): RenderResult => render(<RestTool />)
 
-describe("<RestTool />", () => {
-  test("Should check that the component RestTool is rendered", async () => {
-    const { findByTestId } = renderRestTool();
+describe('RestTool', () => {
+    test('should check that the component RestTool is rendered', async () => {
+        const { findByTestId } = renderComponent();
 
-    const restTool = await findByTestId("rest-tool");
-    expect(restTool)
-  });
+        const restTool = await findByTestId('rest-tool');
+        expect(restTool).toBeTruthy();
+    });
 });

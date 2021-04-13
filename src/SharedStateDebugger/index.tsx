@@ -2,8 +2,10 @@ import React from 'react';
 import { ClassComponent } from '@kubevious/ui-framework/dist';
 import { YamlControlBar } from '@kubevious/ui-components/dist';
 
-import './styles.scss';
+import styles from './styles.module.css';
 import { SharedStateDebuggerState } from './types';
+
+import cx from 'classnames';
 
 export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerState> {
     constructor(props: any) {
@@ -76,30 +78,29 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
     render() {
         const yamlValue = this.getYamlValue();
         const { sharedKeys, activeOption } = this.state;
+
         return (
-            <div data-testid="shared-state-debugger" className="shared-state-debugger">
-                <h2 className="header">Shared State Debugger</h2>
-                <div className="debugger-container">
-                    <div className="multi-select-wrapper">
-                        <select className="multi-select" multiple>
-                            {sharedKeys.map((field, index) => {
-                                return (
-                                    <option
-                                        key={index}
-                                        onClick={() => this.handleSelectOption(field)}
-                                        className={`option ${activeOption === field ? 'active' : ''}`}
-                                    >
-                                        {field}
-                                    </option>
-                                );
-                            })}
+            <div data-testid="shared-state-debugger" className={`${styles.sharedStateDebugger} text-white`}>
+                <h2>Shared State Debugger</h2>
+                <div className={styles.debuggerContainer}>
+                    <div className={styles.multiSelectWrapper}>
+                        <select className={styles.multiSelect} multiple>
+                            {sharedKeys.map((field, index) => (
+                                <option
+                                    key={index}
+                                    onClick={() => this.handleSelectOption(field)}
+                                    className={cx(styles.option, { [styles.active]: activeOption === field })}
+                                >
+                                    {field}
+                                </option>
+                            ))}
                         </select>
                     </div>
-                    <div className="debugger-wrapper">
-                        <input value={activeOption} className="shared-state-input" disabled={true} />
-                        <div className="text-area-container">
+                    <div className={styles.debuggerWrapper}>
+                        <input value={activeOption} className={styles.sharedStateInput} disabled={true} />
+                        <div className={styles.textAreaContainer}>
                             <>
-                                <div className="text-area-label">Field value: </div>
+                                <div className="mt-2">Field value: </div>
                                 <YamlControlBar
                                     beforeChange={this.handleChangeSelectedSharedStateElement}
                                     text={yamlValue}
@@ -107,11 +108,11 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
                                     value={yamlValue}
                                 />
                             </>
-                            <div className="button-container">
-                                <button className="main-btn" onClick={this.handleUpdateSharedStateField}>
+                            <div className={styles.buttonContainer}>
+                                <button className="btn btn-outline-success" onClick={this.handleUpdateSharedStateField}>
                                     Update
                                 </button>
-                                <button className="main-btn" onClick={this.handleDeleteSharedStateField}>
+                                <button className="btn btn-outline-success" onClick={this.handleDeleteSharedStateField}>
                                     Delete
                                 </button>
                             </div>

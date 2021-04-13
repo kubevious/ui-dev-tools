@@ -1,0 +1,55 @@
+:global(.popup-contents) .restTool {
+    padding: 40px;
+    overflow-y: hidden;
+}
+
+:global(.popup-contents) .restTool:hover {
+    overflow-y: auto;
+}
+
+.restTool {
+    box-shadow: 0 0 50px #000000;
+    padding: 10px;
+}
+
+.pathInput {
+    width: 30%;
+}
+
+.btnWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-wrapper {
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    color: #999999;
+}
+
+.textAreaContainer {
+    position: relative;
+}
+
+.textAreaLabel {
+    margin: 20px 0;
+}
+
+.select,
+.input {
+    margin: 5px 30px 5px 0;
+    padding: 5px;
+}
+
+.label {
+    margin: 10px 6px 10px 0;
+}
+
+.section {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 25px;
+}

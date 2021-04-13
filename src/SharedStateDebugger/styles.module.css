@@ -1,10 +1,19 @@
-.shared-state-debugger {
+:global(.popup-contents) .sharedStateDebugger {
+    padding: 40px;
+    overflow-y: hidden;
+}
+
+:global(.popup-contents) .sharedStateDebugger:hover {
+    overflow-y: auto;
+}
+
+.sharedStateDebugger {
     padding: 25px;
     z-index: 200;
     box-shadow: 0 0 50px #000000;
 }
 
-.multi-select {
+.multiSelect {
     width: 300px;
     height: 100%;
 }
@@ -30,52 +39,40 @@
     font-weight: 600;
 }
 
-.multi-select-wrapper {
+.multiSelectWrapper {
     width: 300px;
     height: 100%;
 }
 
-.debugger-wrapper {
+.debuggerWrapper {
     width: calc(100% - 300px);
     padding-left: 20px;
 }
 
-.debugger-container {
+.debuggerContainer {
     display: flex;
     height: calc(100% - 74px);
 }
 
-.shared-state-input {
+.sharedStateInput {
     width: calc(100% - 24px);
     height: 40px;
     padding: 0 10px;
 }
 
-.text-area-container {
+.textAreaContainer {
     height: calc(100% - 64px);
+    position: relative;
 }
 
-.button-container {
+.buttonContainer {
     width: 320px;
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    bottom: 0;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.close-btn {
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
-    color: #4ecd77;
-}
-
-.close-btn:hover {
-    color: #249448;
 }

@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react"
-import { app } from "@kubevious/ui-framework"
+import React, { useEffect, useState } from 'react';
+import { app } from '@kubevious/ui-framework';
 
-import _ from "the-lodash"
+import _ from 'the-lodash';
 
-import "./styles.scss"
+import styles from './styles.module.css';
 
-import { YamlControlBar } from "@kubevious/ui-components"
-import { IWebSocketService } from "@kubevious/ui-middleware"
+import { YamlControlBar } from '@kubevious/ui-components';
+import { IWebSocketService } from '@kubevious/ui-middleware';
+
+import cx from 'classnames';
 
 export const WebsocketTool = () => {
-    const [serviceKind, setServiceKind] = useState<string>("socket")
-    const [subscriptionResults, setSubscriptionResults] = useState<any>(null)
+    const [serviceKind, setServiceKind] = useState<string>('socket');
+    const [subscriptionResults, setSubscriptionResults] = useState<any>(null);
 
     const [subscriptionQuery, setSubscriptionQuery] = useState<Record<string, any> | string>({
-        projectId: ""
-    })
+        projectId: '',
+    });
     const [subscriptionContext, setSubscriptionContext] = useState<Record<string, any> | string>({
-        clusterId: "",
-        snapshotId: "",
-    })
+        clusterId: '',
+        snapshotId: '',
+    });
     const [subscriptionTarget, setSubscriptionTarget] = useState<Record<string, any> | string>({
-        kind: "node",
-        dn: "root",
-    })
+        kind: 'node',
+        dn: 'root',
+    });
 
-    const [subscriptionData, setSubscriptionData] = useState<SubscriptionData | null>(null)
+    const [subscriptionData, setSubscriptionData] = useState<SubscriptionData | null>(null);
 
-    const strSubscriptionResults = JSON.stringify(subscriptionResults, null, 4)
+    const strSubscriptionResults = JSON.stringify(subscriptionResults, null, 4);
 
-    const parsingData = (data: string | {}): {} =>
-        typeof data !== "string" ? data : JSON.parse(data)
+    const parsingData = (data: string | {}): {} => (typeof data !== 'string' ? data : JSON.parse(data));
 
     useEffect(() => {
-
-        console.log("[WebSocketTool] subscriptionData: ", subscriptionData)
+        console.log('[WebSocketTool] subscriptionData: ', subscriptionData);
 
         if (!subscriptionData) {
             return;
@@ -54,46 +54,43 @@ export const WebsocketTool = () => {
             service.updateContext(subscriptionData.context);
 
             service.subscribe(subscriptionData.target, (value) => {
-                setSubscriptionResults(_.concat(subscriptionResults, value))
-            })
-
-        }
-        catch (error) {
-            app.sharedState.set("is_error", true)
-            app.sharedState.set("error", error);
+                setSubscriptionResults(_.concat(subscriptionResults, value));
+            });
+        } catch (error) {
+            app.sharedState.set('is_error', true);
+            app.sharedState.set('error', error);
         }
 
         return () => {
             if (service) {
                 service.close();
             }
-        }
+        };
+    }, [subscriptionData]);
 
-    }, [subscriptionData])
-
-    const strSubscriptionQuery = formatDataToString(subscriptionQuery)
-    const strSubscriptionTarget = formatDataToString(subscriptionTarget)
-    const strSubscriptionContext = formatDataToString(subscriptionContext)
+    const strSubscriptionQuery = formatDataToString(subscriptionQuery);
+    const strSubscriptionTarget = formatDataToString(subscriptionTarget);
+    const strSubscriptionContext = formatDataToString(subscriptionContext);
 
     const handleSubscribe = () => {
-        setSubscriptionResults([])
+        setSubscriptionResults([]);
         try {
             const data: SubscriptionData = {
                 kind: serviceKind,
                 query: parsingData(strSubscriptionQuery),
                 context: parsingData(strSubscriptionContext),
-                target: parsingData(strSubscriptionTarget)
-            }
+                target: parsingData(strSubscriptionTarget),
+            };
 
             setSubscriptionData(data);
         } catch (error) {
-            app.sharedState.set("is_error", true)
-            app.sharedState.set("error", error); // { message: _.toString(error), })
+            app.sharedState.set('is_error', true);
+            app.sharedState.set('error', error); // { message: _.toString(error), })
         }
-    }
+    };
 
     return (
-        <div data-testid="websocket-tool" className="websocket-tool">
+        <div data-testid="websocket-tool" className={cx(styles.websocketTool, 'text-white')}>
             <h2>Websocket Tool</h2>
             <div className="ext-area-container">
                 <div className="label-wrap">
@@ -106,73 +103,61 @@ export const WebsocketTool = () => {
                     onChange={(e) => setServiceKind(e.target.value)}
                 />
             </div>
-            <div className="text-area-container">
-                <>
-                    <div className="text-area-label">
-                        Subscription Query:
-                        </div>
-                    <YamlControlBar
-                        className={"subscription-text-area"}
-                        value={strSubscriptionQuery}
-                        text={strSubscriptionQuery}
-                        beforeChange={({ value }) => setSubscriptionQuery(value)}
-                        downloadButton
-                    />
-                </>
+
+            <div className="text-area-container position-relative mt-2">
+                <div className="text-area-label">Subscription Query:</div>
+                <YamlControlBar
+                    className={styles.subscriptionTextArea}
+                    value={strSubscriptionQuery}
+                    text={strSubscriptionQuery}
+                    beforeChange={({ value }) => setSubscriptionQuery(value)}
+                    downloadButton
+                />
             </div>
-            <div className="text-area-container">
-                <>
-                    <div className="text-area-label">
-                        Subscription Context:
-                        </div>
-                    <YamlControlBar
-                        className={"subscription-text-area"}
-                        value={strSubscriptionContext}
-                        text={strSubscriptionContext}
-                        beforeChange={({ value }) => setSubscriptionContext(value)}
-                        downloadButton
-                    />
-                </>
+
+            <div className="text-area-container position-relative">
+                <div className="text-area-label">Subscription Context:</div>
+                <YamlControlBar
+                    className={styles.subscriptionTextArea}
+                    value={strSubscriptionContext}
+                    text={strSubscriptionContext}
+                    beforeChange={({ value }) => setSubscriptionContext(value)}
+                    downloadButton
+                />
             </div>
-            <div className="text-area-container">
-                <>
-                    <div className="text-area-label">
-                        Subscription Target:
-                        </div>
-                    <YamlControlBar
-                        className={"subscription-text-area"}
-                        value={strSubscriptionTarget}
-                        text={strSubscriptionTarget}
-                        beforeChange={({ value }) => setSubscriptionTarget(value)}
-                        downloadButton
-                    />
-                </>
+
+            <div className="text-area-container position-relative">
+                <div className="text-area-label">Subscription Target:</div>
+                <YamlControlBar
+                    className={styles.subscriptionTextArea}
+                    value={strSubscriptionTarget}
+                    text={strSubscriptionTarget}
+                    beforeChange={({ value }) => setSubscriptionTarget(value)}
+                    downloadButton
+                />
             </div>
-            <div className="subscription-button-container">
-                <button onClick={() => handleSubscribe()} className="main-btn">Subscribe</button>
+
+            <div className={styles.subscriptionButtonContainer}>
+                <button onClick={handleSubscribe} className="btn btn-outline-success">
+                    Subscribe
+                </button>
             </div>
-            <div className="text-area-container">
-                <>
-                    <div className="text-area-label">Yaml Data:</div>
-                    <YamlControlBar
-                        value={strSubscriptionResults}
-                        text={strSubscriptionResults}
-                        downloadButton
-                    />
-                </>
+
+            <div className="text-area-container position-relative">
+                <div className="text-area-label">Yaml Data:</div>
+                <YamlControlBar value={strSubscriptionResults} text={strSubscriptionResults} downloadButton />
             </div>
         </div>
-    )
-}
+    );
+};
 
 function formatDataToString(data: string | {}): string {
-    return typeof data !== "string" ? JSON.stringify(data, null, 2) : data
+    return typeof data !== 'string' ? JSON.stringify(data, null, 2) : data;
 }
 
-
 interface SubscriptionData {
-    kind: string,
-    query: any,
-    context: any,
-    target: any
+    kind: string;
+    query: any;
+    context: any;
+    target: any;
 }

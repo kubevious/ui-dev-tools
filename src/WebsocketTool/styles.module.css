@@ -1,0 +1,31 @@
+:global(.popup-contents) .websocketTool {
+    padding: 40px;
+    overflow-y: hidden;
+}
+
+:global(.popup-contents) .websocketTool:hover {
+    overflow-y: auto;
+}
+
+
+.websocketTool {
+    box-shadow: 0 0 50px #000000;
+    padding: 10px;
+}
+
+.subscriptionTextArea {
+    height: 120px !important;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.subscriptionTextArea::-webkit-scrollbar {
+    display: none;
+}
+
+.subscriptionButtonContainer {
+    display: flex;
+    justify-content: center;
+}

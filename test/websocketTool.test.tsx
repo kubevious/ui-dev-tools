@@ -1,18 +1,16 @@
 import React from 'react';
-import 'jest'
+import 'jest';
 
-import { WebsocketTool } from "../src";
-import { render } from "@testing-library/react";
+import { WebsocketTool } from '../src';
+import { render, RenderResult } from '@testing-library/react';
 
-function renderWebsocketTool() {
-  return render(<WebsocketTool />);
-}
+const renderComponent = (): RenderResult => render(<WebsocketTool />);
 
-describe("<WebsocketTool />", () => {
-  test("Should check that the component WebsocketTool is rendered", async () => {
-    const { findByTestId } = renderWebsocketTool();
+describe('WebsocketTool', () => {
+    test('should check that the component WebsocketTool is rendered', async () => {
+        const { findByTestId } = renderComponent();
 
-    const websocketTool = await findByTestId("websocket-tool");
-    expect(websocketTool)
-  });
+        const websocketTool = await findByTestId('websocket-tool');
+        expect(websocketTool).toBeTruthy();
+    });
 });

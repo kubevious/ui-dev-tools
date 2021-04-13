@@ -4,13 +4,15 @@ import _ from 'the-lodash';
 import { EndpointInfo, ExpandedUserService, HttpParam } from './types';
 import { HttpMethod } from '@kubevious/ui-framework';
 
-import './styles.scss';
+import styles from './styles.module.css';
 
 import { useService } from '@kubevious/ui-framework';
 import { sharedState } from '@kubevious/ui-framework/dist/global';
 import { YamlControlBar, CopyButton } from '@kubevious/ui-components/dist';
 
-const isTesting = process.env.IS_TESTING;
+import cx from 'classnames';
+
+const isTesting = process.env.IS_TESTING || process.env.STORYBOOK;
 
 export const RestTool = () => {
     const service = !isTesting ? useService<ExpandedUserService>({ kind: 'user' }) : null;
@@ -110,7 +112,7 @@ export const RestTool = () => {
     const renderEndpointsTemplateSelector = () => {
         return (
             <select
-                className="select"
+                className={styles.select}
                 onChange={(e) => {
                     const selectedTemplate = endpointsData[e.target.value];
                     setRequestPath(selectedTemplate.name);
@@ -145,42 +147,46 @@ export const RestTool = () => {
     };
 
     return (
-        <div data-testid="rest-tool" className="rest-tool">
+        <div data-testid="rest-tool" className={`${styles.restTool} text-white`}>
             <h2>REST Tool</h2>
-            <div className="section">
+            <div className={styles.section}>
                 <h3>Template</h3>
                 {renderEndpointsTemplateSelector()}
             </div>
-            <div className="section">
+            <div className={styles.section}>
                 <h3>Request</h3>
 
                 <div>
-                    <label className="label">Method: </label>
-                    <select className="select" onChange={(e) => handleChangeRequestType(e)} value={requestMethod}>
+                    <label className={styles.label}>Method: </label>
+                    <select
+                        className={styles.select}
+                        onChange={(e) => handleChangeRequestType(e)}
+                        value={requestMethod}
+                    >
                         {_.keys(HttpMethod).map((method, index) => (
                             <option key={index} value={method.toString()}>
                                 {method}
                             </option>
                         ))}
                     </select>
-                    <label className="label">Path: </label>
+                    <label className={styles.label}>Path: </label>
                     <input
                         type="text"
                         value={requestPath}
-                        className="input path-input"
+                        className={cx(styles.input, styles.pathInput)}
                         onChange={(e) => handleChangePath(e)}
                     />
                 </div>
 
                 {requestPath && (
                     <>
-                        <div className="label">Params: </div>
+                        <div className={styles.label}>Params: </div>
                         {requestParams.map((param, index) => (
                             <div key={index}>
                                 <input
                                     type="text"
                                     value={param.name}
-                                    className="path-input input"
+                                    className={cx(styles.input, styles.pathInput)}
                                     onChange={(e) => {
                                         param.name = e.target.value;
                                         setRequestParams(_.clone(requestParams));
@@ -192,7 +198,7 @@ export const RestTool = () => {
                                 <input
                                     type="text"
                                     value={param.value}
-                                    className="path-input input"
+                                    className={cx(styles.input, styles.pathInput)}
                                     onChange={(e) => {
                                         param.value = e.target.value;
                                         setRequestParams(_.clone(requestParams));
@@ -202,7 +208,7 @@ export const RestTool = () => {
                                     }}
                                 />
                                 <button
-                                    className="main-btn"
+                                    className="btn btn-outline-danger"
                                     onClick={() => {
                                         requestParams.splice(index, 1);
                                         setRequestParams(_.clone(requestParams));
@@ -212,11 +218,11 @@ export const RestTool = () => {
                                     }}
                                 >
                                     Delete
-                                    </button>
+                                </button>
                             </div>
                         ))}
                         <button
-                            className="main-btn"
+                            className="btn btn-outline-success"
                             onClick={() => {
                                 requestParams.push({
                                     name: '',
@@ -226,14 +232,14 @@ export const RestTool = () => {
                             }}
                         >
                             Add
-                            </button>
+                        </button>
                     </>
                 )}
                 {!isTesting && (
-                    <div className="text-area-container">
+                    <div className={styles.textAreaContainer}>
                         {requestMethod !== HttpMethod.GET && (
                             <>
-                                <div className="text-area-label">Request Data: </div>
+                                <div className={styles.textAreaLabel}>Request Data: </div>
                                 <YamlControlBar
                                     value={editedRequestData}
                                     beforeChange={handleChangeRequest}
@@ -242,19 +248,19 @@ export const RestTool = () => {
                                 />
                             </>
                         )}
-                        <div className="btn-wrapper">
-                            <button className="main-btn send" onClick={() => handleSendRequest()}>
+                        <div className={styles.btnWrapper}>
+                            <button className="btn btn-outline-success" onClick={handleSendRequest}>
                                 SEND
-                                </button>
+                            </button>
                         </div>
                     </div>
                 )}
             </div>
-            <div className="section">
+            <div className={styles.section}>
                 <h3>Response</h3>
                 {!isTesting && (
-                    <div className="text-area-container">
-                        <div className="text-area-label">Status Code: {responseCode}</div>
+                    <div className={styles.textAreaContainer}>
+                        <div className={styles.textAreaLabel}>Status Code: {responseCode}</div>
                         <YamlControlBar
                             value={responseData}
                             beforeChange={handleChangeResponse}
@@ -264,18 +270,18 @@ export const RestTool = () => {
                     </div>
                 )}
             </div>
-            <div className="section">
+            <div className={styles.section}>
                 <h3>Auth Info</h3>
                 {!isTesting && (
-                    <div className="text-area-container">
-                        <div className="text-area-label">Info about user:</div>
+                    <div className={styles.textAreaContainer}>
+                        <div className={styles.textAreaLabel}>Info about user:</div>
                         <YamlControlBar
                             value={userData}
                             beforeChange={handleChangeAccessToken}
                             text={userData}
                             downloadButton
                         />
-                        <div className="btn-wrapper">
+                        <div className={styles.btnWrapper}>
                             <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
                         </div>
                     </div>
