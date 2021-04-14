@@ -12,10 +12,8 @@ import { YamlControlBar, CopyButton } from '@kubevious/ui-components/dist';
 
 import cx from 'classnames';
 
-const isTesting = process.env.IS_TESTING || process.env.STORYBOOK;
-
 export const RestTool = () => {
-    const service = !isTesting ? useService<ExpandedUserService>({ kind: 'user' }) : null;
+    const service = useService<ExpandedUserService>({ kind: 'user' });
 
     const [editedRequestData, setEditedRequestData] = useState('{}');
     const [requestMethod, setRequestMethod] = useState(HttpMethod.GET.toString());
@@ -235,57 +233,51 @@ export const RestTool = () => {
                         </button>
                     </>
                 )}
-                {!isTesting && (
-                    <div className={styles.textAreaContainer}>
-                        {requestMethod !== HttpMethod.GET && (
-                            <>
-                                <div className={styles.textAreaLabel}>Request Data: </div>
-                                <YamlControlBar
-                                    value={editedRequestData}
-                                    beforeChange={handleChangeRequest}
-                                    text={editedRequestData}
-                                    downloadButton
-                                />
-                            </>
-                        )}
-                        <div className={styles.btnWrapper}>
-                            <button className="btn btn-outline-success" onClick={handleSendRequest}>
-                                SEND
-                            </button>
-                        </div>
+                <div className={styles.textAreaContainer}>
+                    {requestMethod !== HttpMethod.GET && (
+                        <>
+                            <div className={styles.textAreaLabel}>Request Data: </div>
+                            <YamlControlBar
+                                value={editedRequestData}
+                                beforeChange={handleChangeRequest}
+                                text={editedRequestData}
+                                downloadButton
+                            />
+                        </>
+                    )}
+                    <div className={styles.btnWrapper}>
+                        <button className="btn btn-outline-success" onClick={handleSendRequest}>
+                            SEND
+                        </button>
                     </div>
-                )}
+                </div>
             </div>
             <div className={styles.section}>
                 <h3>Response</h3>
-                {!isTesting && (
-                    <div className={styles.textAreaContainer}>
-                        <div className={styles.textAreaLabel}>Status Code: {responseCode}</div>
-                        <YamlControlBar
-                            value={responseData}
-                            beforeChange={handleChangeResponse}
-                            text={responseData}
-                            downloadButton
-                        />
-                    </div>
-                )}
+                <div className={styles.textAreaContainer}>
+                    <div className={styles.textAreaLabel}>Status Code: {responseCode}</div>
+                    <YamlControlBar
+                        value={responseData}
+                        beforeChange={handleChangeResponse}
+                        text={responseData}
+                        downloadButton
+                    />
+                </div>
             </div>
             <div className={styles.section}>
                 <h3>Auth Info</h3>
-                {!isTesting && (
-                    <div className={styles.textAreaContainer}>
-                        <div className={styles.textAreaLabel}>Info about user:</div>
-                        <YamlControlBar
-                            value={userData}
-                            beforeChange={handleChangeAccessToken}
-                            text={userData}
-                            downloadButton
-                        />
-                        <div className={styles.btnWrapper}>
-                            <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
-                        </div>
+                <div className={styles.textAreaContainer}>
+                    <div className={styles.textAreaLabel}>Info about user:</div>
+                    <YamlControlBar
+                        value={userData}
+                        beforeChange={handleChangeAccessToken}
+                        text={userData}
+                        downloadButton
+                    />
+                    <div className={styles.btnWrapper}>
+                        <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
                     </div>
-                )}
+                </div>
             </div>
         </div>
     );
