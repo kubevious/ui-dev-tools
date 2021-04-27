@@ -3,12 +3,12 @@ import { app } from '@kubevious/ui-framework';
 
 import _ from 'the-lodash';
 
-import styles from './styles.module.css';
-
-import { YamlControlBar } from '@kubevious/ui-components';
+import { CodeControlBar } from '@kubevious/ui-components';
 import { IWebSocketService } from '@kubevious/ui-middleware';
 
 import cx from 'classnames';
+
+import styles from './styles.module.css';
 
 export const WebsocketTool = () => {
     const [serviceKind, setServiceKind] = useState<string>('socket');
@@ -107,10 +107,9 @@ export const WebsocketTool = () => {
 
             <div className="text-area-container position-relative mt-2">
                 <div className="text-area-label">Subscription Query:</div>
-                <YamlControlBar
+                <CodeControlBar
                     className={styles.subscriptionTextArea}
                     value={strSubscriptionQuery}
-                    text={strSubscriptionQuery}
                     beforeChange={({ value }) => setSubscriptionQuery(value)}
                     downloadButton
                 />
@@ -118,10 +117,9 @@ export const WebsocketTool = () => {
 
             <div className="text-area-container position-relative">
                 <div className="text-area-label">Subscription Context:</div>
-                <YamlControlBar
+                <CodeControlBar
                     className={styles.subscriptionTextArea}
                     value={strSubscriptionContext}
-                    text={strSubscriptionContext}
                     beforeChange={({ value }) => setSubscriptionContext(value)}
                     downloadButton
                 />
@@ -129,10 +127,9 @@ export const WebsocketTool = () => {
 
             <div className="text-area-container position-relative">
                 <div className="text-area-label">Subscription Target:</div>
-                <YamlControlBar
+                <CodeControlBar
                     className={styles.subscriptionTextArea}
                     value={strSubscriptionTarget}
-                    text={strSubscriptionTarget}
                     beforeChange={({ value }) => setSubscriptionTarget(value)}
                     downloadButton
                 />
@@ -146,7 +143,7 @@ export const WebsocketTool = () => {
 
             <div className="text-area-container position-relative">
                 <div className="text-area-label">Yaml Data:</div>
-                <YamlControlBar value={strSubscriptionResults} text={strSubscriptionResults} downloadButton />
+                <CodeControlBar value={strSubscriptionResults} downloadButton />
             </div>
         </div>
     );

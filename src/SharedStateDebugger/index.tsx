@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClassComponent } from '@kubevious/ui-framework/dist';
-import { YamlControlBar } from '@kubevious/ui-components/dist';
+import { CodeControlBar } from '@kubevious/ui-components/dist';
 
 import styles from './styles.module.css';
 import { SharedStateDebuggerState } from './types';
@@ -63,6 +63,7 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
 
     getYamlValue(): string {
         const { selectedSharedStateElement } = this.state;
+
         switch (typeof selectedSharedStateElement) {
             case 'boolean':
                 return selectedSharedStateElement.toString();
@@ -99,15 +100,13 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
                     <div className={styles.debuggerWrapper}>
                         <input value={activeOption} className={styles.sharedStateInput} disabled={true} />
                         <div className={styles.textAreaContainer}>
-                            <>
-                                <div className="mt-2">Field value: </div>
-                                <YamlControlBar
-                                    beforeChange={this.handleChangeSelectedSharedStateElement}
-                                    text={yamlValue}
-                                    downloadButton
-                                    value={yamlValue}
-                                />
-                            </>
+                            <div className="mt-2">Field value: </div>
+                            <CodeControlBar
+                                beforeChange={this.handleChangeSelectedSharedStateElement}
+                                downloadButton
+                                value={yamlValue}
+                            />
+
                             <div className={styles.buttonContainer}>
                                 <button className="btn btn-outline-success" onClick={this.handleUpdateSharedStateField}>
                                     Update

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 import { useService } from '@kubevious/ui-framework';
 import { sharedState } from '@kubevious/ui-framework/dist/global';
-import { YamlControlBar, CopyButton } from '@kubevious/ui-components/dist';
+import { CopyButton, CodeControlBar } from '@kubevious/ui-components/dist';
 
 import cx from 'classnames';
 
@@ -151,6 +151,7 @@ export const RestTool = () => {
                 <h3>Template</h3>
                 {renderEndpointsTemplateSelector()}
             </div>
+
             <div className={styles.section}>
                 <h3>Request</h3>
 
@@ -237,10 +238,9 @@ export const RestTool = () => {
                     {requestMethod !== HttpMethod.GET && (
                         <>
                             <div className={styles.textAreaLabel}>Request Data: </div>
-                            <YamlControlBar
+                            <CodeControlBar
                                 value={editedRequestData}
                                 beforeChange={handleChangeRequest}
-                                text={editedRequestData}
                                 downloadButton
                             />
                         </>
@@ -256,24 +256,16 @@ export const RestTool = () => {
                 <h3>Response</h3>
                 <div className={styles.textAreaContainer}>
                     <div className={styles.textAreaLabel}>Status Code: {responseCode}</div>
-                    <YamlControlBar
-                        value={responseData}
-                        beforeChange={handleChangeResponse}
-                        text={responseData}
-                        downloadButton
-                    />
+
+                    <CodeControlBar value={responseData} beforeChange={handleChangeResponse} downloadButton />
                 </div>
             </div>
             <div className={styles.section}>
                 <h3>Auth Info</h3>
                 <div className={styles.textAreaContainer}>
                     <div className={styles.textAreaLabel}>Info about user:</div>
-                    <YamlControlBar
-                        value={userData}
-                        beforeChange={handleChangeAccessToken}
-                        text={userData}
-                        downloadButton
-                    />
+                    <CodeControlBar value={userData} beforeChange={handleChangeAccessToken} downloadButton />
+
                     <div className={styles.btnWrapper}>
                         <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
                     </div>
