@@ -98,12 +98,14 @@ export const RestTool = () => {
             }
         }
 
-        const response = await service?.client.execute(requestMethod as HttpMethod, requestPath, params, data);
+        const response = await service?.client?.execute(requestMethod as HttpMethod, requestPath, params, data);
         if (response) {
             setResponseData(JSON.stringify(response.data, null, 2));
             if (response.status) {
                 setResponseCode(response.status.toString());
             }
+        } else {
+            setResponseData('Some mocked response...');
         }
     };
 
@@ -134,7 +136,7 @@ export const RestTool = () => {
                     }
                 }}
             >
-                <option value=""></option>
+                <option value=''></option>
                 {_.keys(endpointsData).map((endpoint, index) => (
                     <option key={index} value={endpoint}>
                         {endpoint}
@@ -145,7 +147,7 @@ export const RestTool = () => {
     };
 
     return (
-        <div data-testid="rest-tool" className={`${styles.restTool} text-white`}>
+        <div data-testid='rest-tool' className={`${styles.restTool} text-white`}>
             <h2>REST Tool</h2>
             <div className={styles.section}>
                 <h3>Template</h3>
@@ -170,7 +172,7 @@ export const RestTool = () => {
                     </select>
                     <label className={styles.label}>Path: </label>
                     <input
-                        type="text"
+                        type='text'
                         value={requestPath}
                         className={cx(styles.input, styles.pathInput)}
                         onChange={(e) => handleChangePath(e)}
@@ -179,11 +181,11 @@ export const RestTool = () => {
 
                 {requestPath && (
                     <>
-                        <div className={styles.label}>Params: </div>
+                        <div className={styles.label}>Params:</div>
                         {requestParams.map((param, index) => (
                             <div key={index}>
                                 <input
-                                    type="text"
+                                    type='text'
                                     value={param.name}
                                     className={cx(styles.input, styles.pathInput)}
                                     onChange={(e) => {
@@ -195,7 +197,7 @@ export const RestTool = () => {
                                     }}
                                 />
                                 <input
-                                    type="text"
+                                    type='text'
                                     value={param.value}
                                     className={cx(styles.input, styles.pathInput)}
                                     onChange={(e) => {
@@ -207,7 +209,7 @@ export const RestTool = () => {
                                     }}
                                 />
                                 <button
-                                    className="btn btn-outline-danger"
+                                    className='btn btn-outline-danger'
                                     onClick={() => {
                                         requestParams.splice(index, 1);
                                         setRequestParams(_.clone(requestParams));
@@ -221,7 +223,7 @@ export const RestTool = () => {
                             </div>
                         ))}
                         <button
-                            className="btn btn-outline-success"
+                            className='btn btn-outline-success'
                             onClick={() => {
                                 requestParams.push({
                                     name: '',
@@ -237,7 +239,7 @@ export const RestTool = () => {
                 <div className={styles.textAreaContainer}>
                     {requestMethod !== HttpMethod.GET && (
                         <>
-                            <div className={styles.textAreaLabel}>Request Data: </div>
+                            <div className={styles.textAreaLabel}>Request Data:</div>
                             <CodeControlBar
                                 value={editedRequestData}
                                 beforeChange={handleChangeRequest}
@@ -246,7 +248,7 @@ export const RestTool = () => {
                         </>
                     )}
                     <div className={styles.btnWrapper}>
-                        <button className="btn btn-outline-success" onClick={handleSendRequest}>
+                        <button className='btn btn-outline-success' onClick={handleSendRequest}>
                             SEND
                         </button>
                     </div>
@@ -267,7 +269,7 @@ export const RestTool = () => {
                     <CodeControlBar value={userData} beforeChange={handleChangeAccessToken} downloadButton />
 
                     <div className={styles.btnWrapper}>
-                        <CopyButton text={accessToken} buttonText="COPY ACCESS TOKEN" />
+                        <CopyButton text={accessToken} buttonText='COPY ACCESS TOKEN' />
                     </div>
                 </div>
             </div>

@@ -33,6 +33,10 @@
     position: relative;
 }
 
+.textAreaContainer :global(.CodeMirror.cm-s-darcula) {
+    width: 100%;
+}
+
 .textAreaLabel {
     margin: 20px 0;
 }

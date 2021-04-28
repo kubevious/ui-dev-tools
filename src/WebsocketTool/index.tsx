@@ -143,7 +143,7 @@ export const WebsocketTool = () => {
 
             <div className="text-area-container position-relative">
                 <div className="text-area-label">Yaml Data:</div>
-                <CodeControlBar value={strSubscriptionResults} downloadButton />
+                <CodeControlBar className={styles.yamlTextArea} value={strSubscriptionResults} downloadButton />
             </div>
         </div>
     );
