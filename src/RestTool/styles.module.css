@@ -4,7 +4,7 @@
 }
 
 :global(.popup-contents) .restTool:hover {
-    overflow-y: auto;
+    overflow-y: overlay;
 }
 
 .restTool {

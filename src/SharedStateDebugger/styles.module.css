@@ -4,7 +4,7 @@
 }
 
 :global(.popup-contents) .sharedStateDebugger:hover {
-    overflow-y: auto;
+    overflow-y: overlay;
 }
 
 .sharedStateDebugger {

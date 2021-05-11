@@ -4,9 +4,8 @@
 }
 
 :global(.popup-contents) .websocketTool:hover {
-    overflow-y: auto;
+    overflow-y: overlay;
 }
-
 
 .websocketTool {
     box-shadow: 0 0 50px #000000;
@@ -20,7 +19,8 @@
     scrollbar-width: none; /* Firefox */
 }
 
-.subscriptionTextArea :global(.CodeMirror.cm-s-darcula), .yamlTextArea :global(.CodeMirror.cm-s-darcula) {
+.subscriptionTextArea :global(.CodeMirror.cm-s-darcula),
+.yamlTextArea :global(.CodeMirror.cm-s-darcula) {
     width: 100%;
 }
 
