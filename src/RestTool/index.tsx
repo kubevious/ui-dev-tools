@@ -27,6 +27,7 @@ export const RestTool = () => {
 
     const [userData, setUserData] = useState('');
     const [accessToken, setAccessToken] = useState('');
+    const [accessTokenData, setAccessTokenData] = useState('');
 
     useEffect(() => {
         setTimeout(() => {
@@ -58,6 +59,16 @@ export const RestTool = () => {
     useEffect(() => {
         setAccessToken(service?.accessToken() || '');
         setUserData(service?.userData() || '');
+
+        {
+            const data = service?.accessTokenData();
+            if (!data) {
+                setAccessTokenData('');
+            } else {
+                setAccessTokenData(JSON.stringify(data, null, 4));
+            }
+        }
+
     }, [service]);
 
     const handleChangeRequest = ({ value }: { value: string }): void => {
@@ -66,6 +77,10 @@ export const RestTool = () => {
 
     const handleChangeAccessToken = ({ value }: { value: string }): void => {
         setUserData(value);
+    };
+
+    const handleChangeAccessTokenData = ({ value }: { value: string }): void => {
+        setAccessTokenData(value);
     };
 
     const handleChangeResponse = ({ value }: { value: string }): void => {
@@ -265,8 +280,11 @@ export const RestTool = () => {
             <div className={styles.section}>
                 <h3>Auth Info</h3>
                 <div className={styles.textAreaContainer}>
-                    <div className={styles.textAreaLabel}>Info about user:</div>
+                    <div className={styles.textAreaLabel}>User Data:</div>
                     <CodeControlBar value={userData} beforeChange={handleChangeAccessToken} downloadButton />
+
+                    <div className={styles.textAreaLabel}>JWT Data:</div>
+                    <CodeControlBar value={accessTokenData} beforeChange={handleChangeAccessTokenData} downloadButton />
 
                     <div className={styles.btnWrapper}>
                         <CopyButton text={accessToken} buttonText='COPY ACCESS TOKEN' />
