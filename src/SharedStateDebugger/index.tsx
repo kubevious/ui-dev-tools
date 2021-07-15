@@ -1,6 +1,7 @@
+import _ from 'the-lodash';
 import React from 'react';
-import { ClassComponent } from '@kubevious/ui-framework/dist';
-import { CodeControlBar } from '@kubevious/ui-components/dist';
+import { ClassComponent } from '@kubevious/ui-framework';
+import { CodeControlBar } from '@kubevious/ui-components';
 
 import styles from './styles.module.css';
 import { SharedStateDebuggerState } from './types';
@@ -23,7 +24,7 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
     }
 
     componentDidMount() {
-        this.setState({ sharedKeys: this.sharedState.keys });
+        this.setState({ sharedKeys: _.orderBy(this.sharedState.keys, x => x) });
 
         if (!this.state.activeOption) {
             this.setState({ selectedSharedStateElement: undefined });

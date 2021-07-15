@@ -7,8 +7,9 @@ cd src
 
 rm -rf node_modules/
 
-npm install
-npm update \
+yarn
+
+yarn upgrade --latest \
     the-lodash \
     the-promise \
     @kubevious/helpers \
