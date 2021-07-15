@@ -7,14 +7,8 @@ cd src
 
 rm -rf node_modules/
 
-yarn
+${MY_DIR}/update_dependencies.sh
 
-yarn upgrade --latest \
-    the-lodash \
-    the-promise \
-    @kubevious/helpers \
-    @kubevious/ui-framework \
-    @kubevious/ui-middleware \
-    @kubevious/ui-components
+yarn
 
 ${MY_DIR}/build.sh
