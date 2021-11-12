@@ -3,7 +3,7 @@ import { app } from '@kubevious/ui-framework';
 
 import _ from 'the-lodash';
 
-import { CodeControlBar } from '@kubevious/ui-components';
+import { CodeControl } from '@kubevious/ui-components';
 import { IWebSocketService } from '@kubevious/ui-middleware';
 
 import cx from 'classnames';
@@ -107,32 +107,39 @@ export const WebsocketTool = () => {
 
             <div className="text-area-container position-relative mt-2">
                 <div className="text-area-label">Subscription Query:</div>
-                <CodeControlBar
-                    className={styles.subscriptionTextArea}
-                    value={strSubscriptionQuery}
-                    beforeChange={({ value }) => setSubscriptionQuery(value)}
-                    downloadButton
-                />
+
+                <div className={styles.subscriptionTextArea}>
+                    <CodeControl syntax="json"
+                                value={strSubscriptionQuery}
+                                handleChange={setSubscriptionQuery}
+                                showDownloadButton
+                                showCopyButton />
+                </div>
+
             </div>
 
             <div className="text-area-container position-relative">
                 <div className="text-area-label">Subscription Context:</div>
-                <CodeControlBar
-                    className={styles.subscriptionTextArea}
-                    value={strSubscriptionContext}
-                    beforeChange={({ value }) => setSubscriptionContext(value)}
-                    downloadButton
-                />
+
+                <div className={styles.subscriptionTextArea}>
+                    <CodeControl syntax="json"
+                                value={strSubscriptionContext}
+                                handleChange={setSubscriptionContext}
+                                showDownloadButton
+                                showCopyButton />
+                </div>
             </div>
 
             <div className="text-area-container position-relative">
                 <div className="text-area-label">Subscription Target:</div>
-                <CodeControlBar
-                    className={styles.subscriptionTextArea}
-                    value={strSubscriptionTarget}
-                    beforeChange={({ value }) => setSubscriptionTarget(value)}
-                    downloadButton
-                />
+
+                <div className={styles.subscriptionTextArea}>
+                    <CodeControl syntax="json"
+                                value={strSubscriptionTarget}
+                                handleChange={setSubscriptionTarget}
+                                showDownloadButton
+                                showCopyButton />
+                </div>
             </div>
 
             <div className={styles.subscriptionButtonContainer}>
@@ -142,8 +149,14 @@ export const WebsocketTool = () => {
             </div>
 
             <div className="text-area-container position-relative">
-                <div className="text-area-label">Yaml Data:</div>
-                <CodeControlBar className={styles.yamlTextArea} value={strSubscriptionResults} downloadButton />
+                <div className="text-area-label">Socket Data:</div>
+
+                <div className={styles.subscriptionTextArea}>
+                    <CodeControl syntax="json"
+                                value={strSubscriptionResults}
+                                showDownloadButton
+                                showCopyButton />
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import _ from 'the-lodash';
 import React from 'react';
 import { ClassComponent } from '@kubevious/ui-framework';
-import { CodeControlBar } from '@kubevious/ui-components';
+import { CodeControl } from '@kubevious/ui-components';
 
 import styles from './styles.module.css';
 import { SharedStateDebuggerState } from './types';
@@ -58,7 +58,7 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
         this.setState({ sharedKeys: this.sharedState.keys });
     }
 
-    handleChangeSelectedSharedStateElement({ value }: { value: string }): void {
+    handleChangeSelectedSharedStateElement(value: string): void {
         this.setState({ selectedSharedStateElement: value });
     }
 
@@ -102,11 +102,11 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
                         <input value={activeOption} className={styles.sharedStateInput} disabled={true} />
                         <div className={styles.textAreaContainer}>
                             <div className="mt-2">Field value: </div>
-                            <CodeControlBar
-                                beforeChange={this.handleChangeSelectedSharedStateElement}
-                                downloadButton
-                                value={yamlValue}
-                            />
+                            <CodeControl syntax="yaml"
+                                         value={yamlValue}
+                                         handleChange={this.handleChangeSelectedSharedStateElement}
+                                         showDownloadButton
+                                         showCopyButton />
 
                             <div className={styles.buttonContainer}>
                                 <button className="btn btn-outline-success" onClick={this.handleUpdateSharedStateField}>

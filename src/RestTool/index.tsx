@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 import { useService } from '@kubevious/ui-framework';
 import { sharedState } from '@kubevious/ui-framework/dist/global';
-import { CopyButton, CodeControlBar } from '@kubevious/ui-components/dist';
+import { CodeControl, CopyClipboard } from '@kubevious/ui-components';
 
 import cx from 'classnames';
 
@@ -71,19 +71,19 @@ export const RestTool = () => {
 
     }, [service]);
 
-    const handleChangeRequest = ({ value }: { value: string }): void => {
+    const handleChangeRequest = (value: string): void => {
         setEditedRequestData(value);
     };
 
-    const handleChangeAccessToken = ({ value }: { value: string }): void => {
+    const handleChangeAccessToken = (value: string): void => {
         setUserData(value);
     };
 
-    const handleChangeAccessTokenData = ({ value }: { value: string }): void => {
+    const handleChangeAccessTokenData = (value: string): void => {
         setAccessTokenData(value);
     };
 
-    const handleChangeResponse = ({ value }: { value: string }): void => {
+    const handleChangeResponse = (value: string) : void => {
         setResponseData(value);
     };
 
@@ -255,11 +255,12 @@ export const RestTool = () => {
                     {requestMethod !== HttpMethod.GET && (
                         <>
                             <div className={styles.textAreaLabel}>Request Data:</div>
-                            <CodeControlBar
-                                value={editedRequestData}
-                                beforeChange={handleChangeRequest}
-                                downloadButton
-                            />
+
+                            <CodeControl syntax="json"
+                                 value={editedRequestData}
+                                 handleChange={handleChangeRequest}
+                                 showDownloadButton
+                                 showCopyButton />
                         </>
                     )}
                     <div className={styles.btnWrapper}>
@@ -274,20 +275,32 @@ export const RestTool = () => {
                 <div className={styles.textAreaContainer}>
                     <div className={styles.textAreaLabel}>Status Code: {responseCode}</div>
 
-                    <CodeControlBar value={responseData} beforeChange={handleChangeResponse} downloadButton />
+                    <CodeControl syntax="json"
+                                 value={responseData}
+                                 handleChange={handleChangeResponse}
+                                 showDownloadButton
+                                 showCopyButton />
                 </div>
             </div>
             <div className={styles.section}>
                 <h3>Auth Info</h3>
                 <div className={styles.textAreaContainer}>
                     <div className={styles.textAreaLabel}>User Data:</div>
-                    <CodeControlBar value={userData} beforeChange={handleChangeAccessToken} downloadButton />
+                    <CodeControl syntax="json"
+                                 value={userData}
+                                 handleChange={handleChangeAccessToken}
+                                 showDownloadButton
+                                 showCopyButton />
 
                     <div className={styles.textAreaLabel}>JWT Data:</div>
-                    <CodeControlBar value={accessTokenData} beforeChange={handleChangeAccessTokenData} downloadButton />
+                    <CodeControl syntax="json"
+                                 value={accessTokenData}
+                                 handleChange={handleChangeAccessTokenData}
+                                 showDownloadButton
+                                 showCopyButton />
 
                     <div className={styles.btnWrapper}>
-                        <CopyButton text={accessToken} buttonText='COPY ACCESS TOKEN' />
+                        <CopyClipboard text={accessToken} />
                     </div>
                 </div>
             </div>
