@@ -31,16 +31,16 @@ export const RestTool = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            const endpointsFromState = sharedState.get('endpoints');
+            const endpointsFromState = sharedState.get<string[] | EndpointInfo[]>('endpoints', []);
 
-            const generatedEndpoints: string | EndpointInfo[] = _.map(endpointsFromState, (x) => {
+            const generatedEndpoints = _.map(endpointsFromState, (x) => {
                 if (_.isString(x)) {
                     return {
                         name: x,
                         method: HttpMethod.GET,
                     };
                 } else {
-                    return x;
+                    return x as EndpointInfo;
                 }
             });
 

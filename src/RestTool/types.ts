@@ -1,5 +1,14 @@
 import { IHttpClient, HttpMethod } from '@kubevious/ui-framework'
-import { IUserService } from '@kubevious/ui-middleware';
+// import { IUserService } from '@kubevious/ui-middleware';
+
+interface IUserService
+{
+    close() : void;
+
+    accessToken() : string;
+    userData() : any;
+    accessTokenData() : any;
+}
 
 export interface EndpointSample {
     body?: any,

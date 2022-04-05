@@ -34,7 +34,7 @@ export class SharedStateDebugger extends ClassComponent<{}, SharedStateDebuggerS
 
     handleSelectOption(option: string): void {
         this.setState({ activeOption: option });
-        const newValue = this.sharedState.get(option);
+        const newValue = this.sharedState.tryGet(option);
         this.setState({ selectedSharedStateElement: newValue });
     }
 
