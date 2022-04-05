@@ -1,4 +1,4 @@
-import { IUserService } from '@kubevious/ui-middleware';
+import { IUserService } from '../../src/RestTool/types';
 
 export class UserService implements IUserService {
     authorizationHeader(): string {

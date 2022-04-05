@@ -1,7 +1,7 @@
 import { IHttpClient, HttpMethod } from '@kubevious/ui-framework'
 // import { IUserService } from '@kubevious/ui-middleware';
 
-interface IUserService
+export interface IUserService
 {
     close() : void;
 
