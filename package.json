@@ -32,9 +32,10 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@kubevious/helpers": "^1.0.63",
-    "@kubevious/ui-components": "^1.0.207",
+    "@kubevious/http-client": "^1.0.19",
+    "@kubevious/ui-components": "^1.0.210",
     "@kubevious/ui-framework": "^1.0.59",
-    "@kubevious/ui-middleware": "^1.0.46",
+    "@kubevious/ui-middleware": "^1.0.59",
     "classnames": "^2.2.6",
     "codemirror": "^5.60.0",
     "golden-layout": "^1.5.9",
@@ -93,7 +94,8 @@
     "the-lodash": "^2.0.9",
     "the-promise": "^2.0.13",
     "@kubevious/ui-framework": "^1.0.59",
-    "@kubevious/ui-middleware": "^1.0.46",
-    "@kubevious/ui-components": "^1.0.207"
+    "@kubevious/ui-middleware": "^1.0.59",
+    "@kubevious/ui-components": "^1.0.210",
+    "@kubevious/http-client": "^1.0.19"
   }
 }

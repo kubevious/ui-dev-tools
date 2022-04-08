@@ -1604,10 +1604,10 @@
     the-promise "^2.0.12"
     uuid "^8.3.2"
 
-"@kubevious/ui-components@^1.0.207":
-  version "1.0.207"
-  resolved "https://registry.yarnpkg.com/@kubevious/ui-components/-/ui-components-1.0.207.tgz#df25e75d5b39d73d0347ea2791c2eb2d4b284723"
-  integrity sha512-TdnbzL7sQNL8J2F34NyMqS2rPMFSpjTzwDcSDDfNHxJAR9jFjVUu14rs0xrZxwSL85UfiiD+sIg8eJzTh3cL3Q==
+"@kubevious/ui-components@^1.0.210":
+  version "1.0.210"
+  resolved "https://registry.yarnpkg.com/@kubevious/ui-components/-/ui-components-1.0.210.tgz#5b04b49e20ce3e0239abd27cd3dcaabf2e0e826a"
+  integrity sha512-AO0FIVP9IeDjBuMfNHcTlhbIybTprZGi+ZighMKu1A/lHvd2zlnWMDEerMMkcMBOUpFBT40JlwLLMH8YLZoU5Q==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "6.1.1"
     "@fortawesome/free-brands-svg-icons" "6.1.1"
@@ -1649,12 +1649,13 @@
     the-promise "^2.0.13"
     uuid "^8.3.2"
 
-"@kubevious/ui-middleware@^1.0.46":
-  version "1.0.46"
-  resolved "https://registry.yarnpkg.com/@kubevious/ui-middleware/-/ui-middleware-1.0.46.tgz#10d8ca7739bbf32d44bf0158ea48a38b9a8124df"
-  integrity sha512-+vqrUrNL7QaJkQQkadI9IrBWNCFzt3kkrBcO6lIO/VT0TwpfVlwoVrnjHL8AifmKIgb4sb3fzA4JO4NVEunAkA==
+"@kubevious/ui-middleware@^1.0.46", "@kubevious/ui-middleware@^1.0.59":
+  version "1.0.59"
+  resolved "https://registry.yarnpkg.com/@kubevious/ui-middleware/-/ui-middleware-1.0.59.tgz#214d5ff9985c7099bd0480ab671135f2d35dce70"
+  integrity sha512-Wk/uhWu/uk8rRO23gaJTnh9i+GffX0YL8nXYEharOI1g0TmZHou6gjtWhhjDPEcOXMbizBfp2Sf9vQJKe/v0Ag==
   dependencies:
     "@kubevious/entity-meta" "^1.0.56"
+    "@kubevious/http-client" "^1.0.19"
     the-promise "^2.0.13"
 
 "@mdx-js/loader@^1.6.22":

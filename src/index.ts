@@ -4,4 +4,4 @@ export { WebsocketTool } from './WebsocketTool';
 
 export { DevToolsPage } from './DevToolsPage'
 
-export type { EndpointInfo } from './RestTool/types'
+export type { EndpointInfo, UserEndpointInfo } from './RestTool/types'

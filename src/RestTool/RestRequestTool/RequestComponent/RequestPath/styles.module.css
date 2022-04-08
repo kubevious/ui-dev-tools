@@ -1,0 +1,14 @@
+.requestPath {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.methodSelect {
+    width: 200px;
+}
+
+.pathInput {
+    flex-grow: 1;
+}

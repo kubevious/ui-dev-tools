@@ -6,6 +6,7 @@ REPO_DEPENDENCIES=(
     "@kubevious/ui-framework"
     "@kubevious/ui-middleware"
     "@kubevious/ui-components"
+    "@kubevious/http-client"
 )
 
 
@@ -15,4 +16,5 @@ FORCE_RESOLVE_DEPENDENCIES=(
     "@kubevious/ui-framework"
     "@kubevious/ui-middleware"
     "@kubevious/ui-components"
+    "@kubevious/http-client"
 )
