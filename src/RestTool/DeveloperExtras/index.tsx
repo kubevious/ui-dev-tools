@@ -56,7 +56,7 @@ export const DeveloperExtras : FC = () => {
 
     return (
         <div data-testid='dev-extras-tool'
-             className={styles.restTool}>
+             className={styles.devExtras}>
             <h2>Dev Extras</h2>
 
             <SectionedContent

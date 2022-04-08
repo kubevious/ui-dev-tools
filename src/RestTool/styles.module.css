@@ -1,10 +1,9 @@
 .restTool {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 40px;
     
     box-sizing: border-box;
-    padding: 20px;
 
     color: white;
 }

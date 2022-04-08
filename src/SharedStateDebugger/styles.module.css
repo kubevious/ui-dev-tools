@@ -8,7 +8,7 @@
 }
 
 .sharedStateDebugger {
-    padding: 25px;
+    height: 100%;
     z-index: 200;
     box-shadow: 0 0 50px #000000;
 }
