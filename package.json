@@ -33,7 +33,7 @@
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@kubevious/helpers": "^1.0.63",
     "@kubevious/http-client": "^1.0.19",
-    "@kubevious/ui-components": "^1.0.212",
+    "@kubevious/ui-components": "^1.0.214",
     "@kubevious/ui-framework": "^1.0.59",
     "@kubevious/ui-middleware": "^1.0.59",
     "classnames": "^2.2.6",
@@ -95,7 +95,7 @@
     "the-promise": "^2.0.13",
     "@kubevious/ui-framework": "^1.0.59",
     "@kubevious/ui-middleware": "^1.0.59",
-    "@kubevious/ui-components": "^1.0.212",
+    "@kubevious/ui-components": "^1.0.214",
     "@kubevious/http-client": "^1.0.19"
   }
 }

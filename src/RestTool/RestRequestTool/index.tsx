@@ -16,10 +16,11 @@ import { ResponseComponent } from './ResponseComponent'
 export const RestRequestTool : FC = () => {
     const service = useService<IDeveloperService>({ kind: 'developer' });
 
+    const [endpoints, setEndpoints] = useState<Record<string, EndpointInfo>>({});
+
     const [editedRequestData, setEditedRequestData] = useState('{}');
     const [requestMethod, setRequestMethod] = useState(HttpMethod.GET.toString());
     const [requestPath, setRequestPath] = useState('');
-    const [endpoints, setEndpoints] = useState<EndpointInfo[]>([]);
     const [requestParams, setRequestParams] = useState<HttpParam[]>([]);
     const [paramsHistory, setParamsHistory] = useState<Record<string, string>>({});
 
@@ -40,16 +41,18 @@ export const RestRequestTool : FC = () => {
             }
         });
 
-        setEndpoints(generatedEndpoints);
+
+        const endpointsData: Record<string, EndpointInfo> = _.makeDict(
+            generatedEndpoints,
+            (x) => {
+                return `${x.method} :: ${x.name}`;
+            },
+            (x) => x,
+        );
+
+        setEndpoints(endpointsData);
     }, []);
 
-    const endpointsData: Record<string, EndpointInfo> = _.makeDict(
-        endpoints,
-        (x) => {
-            return `${x.method} :: ${x.name}`;
-        },
-        (x) => x,
-    );
 
     const handleSendRequest = async (): Promise<void> => {
         let params: Record<string, string> | undefined = undefined;
@@ -82,7 +85,7 @@ export const RestRequestTool : FC = () => {
 
     const activateTemplate = (name: string) =>
     {
-        const selectedTemplate = endpointsData[name];
+        const selectedTemplate = endpoints[name];
         if (!selectedTemplate) {
             setRequestPath('');
             setRequestMethod(HttpMethod.GET.toString());
@@ -115,7 +118,7 @@ export const RestRequestTool : FC = () => {
     const renderEndpointsTemplateSelector = () => {
 
         const options : any[] = [{ label: '', value: ''}];
-        for(const endpoint of _.keys(endpointsData))
+        for(const endpoint of _.keys(endpoints))
         {
             options.push({ label: endpoint, value: endpoint})
         }

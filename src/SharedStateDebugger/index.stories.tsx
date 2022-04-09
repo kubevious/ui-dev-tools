@@ -18,7 +18,7 @@ sharedState.set("foo-json", {
 });
 
 export const Default = () => (
-    <div style={{ background: '#35373e', height: "500px" }}>
+    <div style={{ background: '#35373e', height: "700px", padding: "20px", color: "white" }}>
         <SharedStateDebugger />
     </div>
 );

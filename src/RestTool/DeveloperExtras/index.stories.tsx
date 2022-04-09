@@ -10,7 +10,7 @@ export default {
 setupMock();
 
 export const Default = () => (
-    <div style={{ background: '#35373e' }}>
+    <div style={{ background: '#35373e', padding: "20px" }}>
         <DeveloperExtras />
     </div>
 );

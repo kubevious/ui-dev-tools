@@ -1,6 +1,6 @@
 import { WebSocketService } from './websocket-service';
 import { app, HttpMethod } from '@kubevious/ui-framework';
-import { UserEndpointInfo } from '../../src';
+import { UserEndpointInfo, WebSocketEndpointInfo } from '../../src';
 import { DeveloperService }from './developer-service';
 
 export function setupMock() {
@@ -41,6 +41,23 @@ export function setupMock() {
     ]
 
     sharedState.set('endpoints', ENDPOINTS);
+
+    const WEBSOCKET_ENDPOINTS : WebSocketEndpointInfo[] = [
+        {
+            name: 'Latest Snapshot',
+            query: { kind: 'socket' },
+            target: { kind: 'latest_snapshot'},
+        },
+        {
+            name: 'Dn Subscription',
+            query: { kind: 'socket' },
+            context: { snapshot_id: 'abcd' },
+            target: { kind: 'node', dn: 'root/logic' },
+        }
+    ];
+
+    sharedState.set('websocket_endpoints', WEBSOCKET_ENDPOINTS);
+
 
     app.registerService({ kind: 'socket' }, () => {
         return new WebSocketService();
