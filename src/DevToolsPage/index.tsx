@@ -1,7 +1,5 @@
-import { faBug, faVials } from '@fortawesome/free-solid-svg-icons';
-import { faRocketchat } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactNode, useState } from 'react';
+import { FontAwesomeIcon, FABrandsIcons, FASolidIcons } from '@kubevious/ui-components';
 import { RestTool } from '../RestTool';
 import { SharedStateDebugger } from '../SharedStateDebugger';
 import { WebsocketTool } from '../WebsocketTool';
@@ -32,7 +30,7 @@ export const DevToolsPage = () => {
                         'btn-outline-success': tab !== DevToolTabs.sharedStateDebugger,
                     })}
                 >
-                    <FontAwesomeIcon icon={faBug} color="white" size="lg" className="me-2" />
+                    <FontAwesomeIcon icon={FASolidIcons.faBug} color="white" size="lg" className="me-2" />
                     Shared State Debugger
                 </button>
                 <button
@@ -42,7 +40,7 @@ export const DevToolsPage = () => {
                         'btn-outline-success': tab !== DevToolTabs.restTool,
                     })}
                 >
-                    <FontAwesomeIcon icon={faVials} color="white" size="lg" className="me-2" />
+                    <FontAwesomeIcon icon={FASolidIcons.faVials} color="white" size="lg" className="me-2" />
                     REST tool
                 </button>
 
@@ -53,7 +51,7 @@ export const DevToolsPage = () => {
                         'btn-outline-success': tab !== DevToolTabs.websocketTool,
                     })}
                 >
-                    <FontAwesomeIcon icon={faRocketchat} color="white" size="lg" className="me-2" />
+                    <FontAwesomeIcon icon={FABrandsIcons.faRocketchat} color="white" size="lg" className="me-2" />
                     Websocket Tool
                 </button>
             </div>

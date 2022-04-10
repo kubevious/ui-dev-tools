@@ -17,12 +17,8 @@ export const WebsocketTool : FC = () => {
     const [socketServiceQuery, setSocketServiceQuery] = useState<any>({
         kind: 'socket',
     });
-    const [subscriptionContext, setSubscriptionContext] = useState<any>({
-    });
-    const [subscriptionTarget, setSubscriptionTarget] = useState<any>({
-        kind: 'node',
-        dn: 'root',
-    });
+    const [subscriptionContext, setSubscriptionContext] = useState<any>({ });
+    const [subscriptionTarget, setSubscriptionTarget] = useState<any>({ });
 
     const [subscriptionResults, setSubscriptionResults] = useState<any[]>([]);
 
@@ -83,7 +79,7 @@ export const WebsocketTool : FC = () => {
         if (!selectedTemplate) {
             setSocketServiceQuery({ kind: 'socket' })
             setSubscriptionContext({ })
-            setSubscriptionTarget({ kind: 'node', dn: 'root' })
+            setSubscriptionTarget({ })
             return;
         }
     
