@@ -33,6 +33,7 @@
     "@kubevious/ui-middleware": "^1.0.59",
     "classnames": "^2.2.6",
     "react-router-dom": "^5.2.0",
+    "react-usestateref": "^1.0.8",
     "the-lodash": "^2.0.9",
     "the-promise": "^2.0.13"
   },

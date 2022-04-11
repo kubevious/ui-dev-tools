@@ -49,10 +49,16 @@ export function setupMock() {
             target: { kind: 'latest_snapshot'},
         },
         {
-            name: 'Dn Subscription',
+            name: 'Dn Node Subscription',
             query: { kind: 'socket' },
-            context: { snapshot_id: 'abcd' },
-            target: { kind: 'node', dn: 'root/logic' },
+            context: { snapshot_id: '' },
+            target: { kind: 'node', dn: '' },
+        },
+        {
+            name: 'Dn Alerts Subscription',
+            query: { kind: 'socket' },
+            context: { snapshot_id: '' },
+            target: { kind: 'alerts', dn: '' },
         }
     ];
 

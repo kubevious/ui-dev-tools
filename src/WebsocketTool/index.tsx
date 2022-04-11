@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
+import useState from 'react-usestateref'
 import { app } from '@kubevious/ui-framework';
 
 import _ from 'the-lodash';
@@ -20,7 +21,10 @@ export const WebsocketTool : FC = () => {
     const [subscriptionContext, setSubscriptionContext] = useState<any>({ });
     const [subscriptionTarget, setSubscriptionTarget] = useState<any>({ });
 
-    const [subscriptionResults, setSubscriptionResults] = useState<any[]>([]);
+    const [contextHistory, setContextHistory] = useState<Record<string, any>>({ });
+    const [targetHistory, setTargetHistory] = useState<Record<string, any>>({ });
+
+    const [subscriptionResults, setSubscriptionResults, subscriptionResultsRef] = useState<any[]>([]);
 
     useEffect(() => {
         const endpointsFromState = app.sharedState.get<WebSocketEndpointInfo[]>('websocket_endpoints', []);
@@ -46,10 +50,27 @@ export const WebsocketTool : FC = () => {
 
         try {
 
+            const context = subscriptionContext as Record<string, any>;
+            {
+                const newContextHistory = _.clone(contextHistory);
+                for(const x of _.keys(context)) {
+                    newContextHistory[x] = context[x];
+                }
+                setContextHistory(newContextHistory);
+            }
+            const target = subscriptionTarget as Record<string, any>;
+            {
+                const newTargetHistory = _.clone(targetHistory);
+                for(const x of _.keys(target)) {
+                    newTargetHistory[x] = target[x];
+                }
+                setTargetHistory(newTargetHistory);
+            }
+
             const service = app.serviceRegistry.resolveService<IWebSocketService>(socketServiceQuery);
-            service.updateContext(subscriptionContext as Record<string, any>);
-            service.subscribe(subscriptionTarget as Record<string, any>, (value) => {
-                setSubscriptionResults(_.concat(subscriptionResults, value));
+            service.updateContext(context);
+            service.subscribe(target, (value: any) => {
+                setSubscriptionResults(_.concat(_.clone(subscriptionResultsRef.current), value));
             });
             setCurrentService(service);
 
@@ -84,8 +105,26 @@ export const WebsocketTool : FC = () => {
         }
     
         setSocketServiceQuery(selectedTemplate.query);
-        setSubscriptionContext(selectedTemplate.context ?? {});
-        setSubscriptionTarget(selectedTemplate.target);
+        {
+            const newContext = _.clone(selectedTemplate.context ?? {});
+            for(const x of _.keys(newContext)) {
+                const value = contextHistory[x];
+                if (isValuePresent(value) && !isValuePresent(newContext[x])) {
+                    newContext[x] = value;
+                }
+            }
+            setSubscriptionContext(newContext);
+        }
+        {
+            const newTarget = _.clone(selectedTemplate.target ?? {});
+            for(const x of _.keys(newTarget)) {
+                const value = targetHistory[x];
+                if (isValuePresent(value) && !isValuePresent(newTarget[x])) {
+                    newTarget[x] = value;
+                }
+            }
+            setSubscriptionTarget(newTarget);
+        }
     }
 
     const renderEndpointsTemplateSelector = () => {
@@ -171,4 +210,17 @@ export const WebsocketTool : FC = () => {
 
         </div>
     );
+}
+
+function isValuePresent(value: any)
+{
+    if (_.isNullOrUndefined(value)) {
+        return false;
+    }
+    if (_.isString(value)) {
+        if (value.length === 0) {
+            return false;
+        }
+    }
+    return true;
 }
