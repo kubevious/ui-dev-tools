@@ -26,11 +26,10 @@
     "url": "https://github.com/kubevious/ui-dev-tools"
   },
   "dependencies": {
-    "@kubevious/helpers": "^1.0.63",
     "@kubevious/http-client": "^1.0.19",
-    "@kubevious/ui-components": "^1.0.214",
+    "@kubevious/ui-components": "^1.0.231",
     "@kubevious/ui-framework": "^1.0.59",
-    "@kubevious/ui-middleware": "^1.0.59",
+    "@kubevious/ui-middleware": "^1.0.62",
     "classnames": "^2.2.6",
     "react-router-dom": "^5.2.0",
     "react-usestateref": "^1.0.8",
@@ -86,8 +85,8 @@
     "the-lodash": "^2.0.9",
     "the-promise": "^2.0.13",
     "@kubevious/ui-framework": "^1.0.59",
-    "@kubevious/ui-middleware": "^1.0.59",
-    "@kubevious/ui-components": "^1.0.214",
+    "@kubevious/ui-middleware": "^1.0.62",
+    "@kubevious/ui-components": "^1.0.231",
     "@kubevious/http-client": "^1.0.19"
   }
 }
