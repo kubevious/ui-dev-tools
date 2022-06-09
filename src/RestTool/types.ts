@@ -1,5 +1,6 @@
 import { HttpMethod } from '@kubevious/ui-framework'
 export interface EndpointSample {
+    params?: Record<string, any>,
     body?: any,
 }
 export interface EndpointInfo {
