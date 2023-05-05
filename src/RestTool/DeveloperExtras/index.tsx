@@ -1,6 +1,5 @@
 import React, { FC,  useState } from 'react';
 import _ from 'the-lodash';
-import { Promise } from 'the-promise';
 
 import { useService } from '@kubevious/ui-framework';
 import { CodeControl, SectionedContent, SectionItem } from '@kubevious/ui-components';
